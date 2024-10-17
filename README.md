@@ -5,18 +5,13 @@ This repository contains a Terraform example to create a production-ready S3 buc
 ## Requirements
 
 - Terraform
+- awscli
 
-## Usage
+## Structure
+    .
+    ├── terraform               # Terraform files to provision the bucket
+    ├── utils                   # Util scripts
+    └── README.md
 
-1. Initialize the Terraform configuration:
-    ```sh
-    terraform init
-    ```
 
-2. Apply the Terraform configuration to create the S3 bucket:
-    ```sh
-    terraform apply
-    ```
-
-3. Confirm the apply step by typing `yes` when prompted.
-
+Follow `terraform/RADME.md` to provision the bucket

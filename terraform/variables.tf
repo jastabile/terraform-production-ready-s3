@@ -12,6 +12,14 @@ variable "bucket_name" {
   default     = "my-bucket"
 }
 
+# force_destroy variable
+variable "force_destroy" {
+  description = "Whether to force destroy the bucket"
+  type        = bool
+  default     = false
+}
+
+
 # logging_bucket_name variable
 variable "logging_bucket_name" {
   description = "The name of the S3 bucket for logging"

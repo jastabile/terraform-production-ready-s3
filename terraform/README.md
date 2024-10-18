@@ -34,13 +34,7 @@ aws s3api put-bucket-versioning --bucket <BUCKET_NAME> --versioning-configuratio
 ```
 
 ## Clean
-
-1. Empty versioned bucket 
-    ```sh
-    python ../scripts/empty_bucket.py <BUCKET_NAME>
-    ```
-
-2. Apply the Terraform configuration to create the S3 bucket:
+Apply the Terraform configuration to clean and destroy the S3 bucket:
     ```sh
     terraform destroy -auto-aprove
     ```

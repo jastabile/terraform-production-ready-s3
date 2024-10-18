@@ -1,6 +1,7 @@
 # Create an S3 bucket
 resource "aws_s3_bucket" "example" {
-  bucket = local.bucket_name
+  bucket = var.bucket_name
+  force_destroy = var.force_destroy
   tags = local.tags
 }
 

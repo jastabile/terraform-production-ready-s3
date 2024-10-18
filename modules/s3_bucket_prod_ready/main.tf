@@ -2,7 +2,7 @@
 resource "aws_s3_bucket" "example" {
   bucket = var.bucket_name
   force_destroy = var.force_destroy
-  tags = local.tags
+  tags = var.tags
 }
 
 # Add versioning
@@ -10,20 +10,20 @@ resource "aws_s3_bucket_versioning" "example" {
   bucket = aws_s3_bucket.example.id
 
   versioning_configuration {
-    status = "Enabled"
+    status = var.versioning_status
   }
 }
 
 # Create a KMS key with rotation
 resource "aws_kms_key" "example" {
-  description             = "KMS key for S3 bucket"
-  rotation_period_in_days = 365
-  enable_key_rotation     = true
+  description             = var.kmskey_description
+  rotation_period_in_days = var.kmskey_rotation_period
+  enable_key_rotation     = var.kmskey_key_rotation
 }
 
 # Create alias for the KMS key
 resource "aws_kms_alias" "example" {
-  name          = "alias/s3-kms-alias"
+  name          = var.kms_alias_name
   target_key_id = aws_kms_key.example.id
 }
 
@@ -33,9 +33,9 @@ resource "aws_s3_bucket_server_side_encryption_configuration" "example" {
   rule {
     apply_server_side_encryption_by_default {
       kms_master_key_id = aws_kms_key.example.id
-      sse_algorithm     = "aws:kms"
+      sse_algorithm     = var.sse_algorithm
     }
-    bucket_key_enabled = true
+    bucket_key_enabled = var.bucket_key_enabled
   }
 }
 
@@ -52,5 +52,5 @@ resource "aws_s3_bucket" "logging" {
   count = var.create_logging_bucket ? 1 : 0
 
   bucket = var.logging_bucket_name
-  tags = local.tags
+  tags = var.tags
 }
